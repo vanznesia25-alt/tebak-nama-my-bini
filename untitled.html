@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Tebak nama mybini</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1e1e1e, #444);
+        color: #fff;
+        text-align: center;
+        padding: 50px;
+    }
+    h1 { margin-bottom: 10px; }
+    input, button {
+        padding: 10px;
+        margin: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+    button {
+        cursor: pointer;
+        background-color: #ff5722;
+        color: #fff;
+        transition: 0.3s;
+    }
+    button:hover { background-color: #e64a19; }
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        transition: 0.5s;
+    }
+    #score {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Game Tebak Nama</h1>
+<p>My bini mempunyai nama. Tebak nama itu!</p>
+<input type="text" id="guess" placeholder="Masukkan nama my bini">
+<button onclick="checkGuess()">Tebak!</button>
+
+<p id="result"></p>
+<p id="score">Skor: 3 | Percobaan tersisa: 3</p>
+
+<script>
+const names = ["Cailin", "Cailin", "Cailin", "Cailin", "Cailin"]; // daftar nama
+let nameToGuess = names[Math.floor(Math.random() * names.length)];
+let attemptsLeft = 3;
+let score = 3;
+
+function checkGuess() {
+    const userGuess = document.getElementById("guess").value.trim();
+    const result = document.getElementById("result");
+    const scoreText = document.getElementById("score");
+
+    if (!userGuess) {
+        result.textContent = "Masukkan nama dulu!";
+        return;
+    }
+
+    if (userGuess.toLowerCase() === nameToGuess.toLowerCase()) {
+        result.style.color = "#4CAF50";
+        result.textContent = "🎉 Benar! Kamu hebat!";
+        resetGame();
+    } else {
+        attemptsLeft--;
+        score--;
+        result.style.color = "#ffeb3b";
+        result.textContent = `Salah! Coba lagi.`;
+        scoreText.textContent = `Skor: ${score} | Percobaan tersisa: ${attemptsLeft}`;
+
+        if (attemptsLeft === 0) {
+            result.style.color = "#f44336";
+            result.textContent = `Game Over! Nama my bini benar adalah ${nameToGuess}.`;
+            resetGame();
+        }
+    }
+}
+
+function resetGame() {
+    setTimeout(() => {
+        nameToGuess = names[Math.floor(Math.random() * names.length)];
+        attemptsLeft = 3;
+        score = 3;
+        document.getElementById("score").textContent = `Skor: ${score} | Percobaan tersisa: ${attemptsLeft}`;
+        document.getElementById("result").textContent = "";
+        document.getElementById("guess").value = "";
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
