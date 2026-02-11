@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak Nama My Istri</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #1f8ef1;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0f7ae5;
+    }
+    p {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tebak Nama My Istri</h1>
+  <div>
+    <input type="text" id="guessInput" placeholder="Tebak nama...">
+    <button onclick="checkGuess()">Tebak</button>
+  </div>
+  <p id="hint"></p>
+
+  <script>
+    const correctName = "Cailin"; // Nama yang harus ditebak
+    const hintEl = document.getElementById("hint");
+
+    function checkGuess() {
+      const userGuess = document.getElementById("guessInput").value.trim();
+
+      if (userGuess === "") {
+        hintEl.textContent = "Masukkan tebakan dulu!";
+        return;
+      }
+
+      if (userGuess.toLowerCase() === correctName.toLowerCase()) {
+        hintEl.textContent = "Benar! saya kasih bintang 5 ⭐⭐⭐⭐⭐";
+      } else {
+        // Berikan petunjuk sederhana
+        let firstLetter = correctName.charAt(0);
+        hintEl.textContent = `Salah!. Kalo salah lagi gw tampol lu😡`;
+      }
+
+      document.getElementById("guessInput").value = "";
+      document.getElementById("guessInput").focus();
+    }
+  </script>
+</body
